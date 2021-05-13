@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pin Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="pin-generator half-width">
+                    <input id="rand-display" class="form-control" type="text">
+                    <button id="rand-button" class="generate-btn">Generate Pin</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-section half-width">
+                    <input id="num-display" class="form-control" type="text">
+                    <div class="numbers">
+                        <div class="calc-body">
+                            <div class="calc-button-row">
+                              <div id="seven" class="button">7</div>
+                              <div id="eight" class="button">8</div>
+                              <div id="nine" class="button">9</div>
+                            </div>
+                            <div class="calc-button-row">
+                              <div id="four" class="button">4</div>
+                              <div id="five" class="button">5</div>
+                              <div id="six" class="button">6</div>
+                            </div>
+                            <div class="calc-button-row">
+                              <div id="one" class="button">1</div>
+                              <div id="two" class="button">2</div>
+                              <div id="three" class="button">3</div>
+                            </div>
+                            <div class="calc-button-row">
+                                <div id="reduce" class="button"><</div>
+                                <div id="zero" class="button">0</div>
+                                <div id="clear" class="button">C</div>
+                            </div>
+                            <div>
+                                <button id="submit" type="submit" class="submit-btn">Submit</button>
+                                <p class="action-left">3 try left</p>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="notify-section">
+            <p id="notification1" class="notify">❌ Pin Didn't Match, Please try again</p>
+            <p id="notification2" class="notify">✅ Pin Matched... Secret door is opening for you</p>
+        </div>
+    </div>
+    
+
+
+
+
+
+
+
+    <script>
+        // notification invisible 
+        document.getElementById("notification1").style.display = "none";
+        document.getElementById("notification2").style.display = "none";
+
+        //random number
+
+        const random = document.getElementById("rand-button");
+        random.addEventListener('click', function(){
+            const num  = Math.ceil(Math.random()*(9999 - 1000) + 1000);
+            console.log(num);
+
+            const random = document.getElementById("rand-display").value =num;
+
+            console.log(random);
+
+        })
+
+        const one = document.getElementById("one");
+        one.addEventListener('click', function(){
+
+            let dispNum = numberDisplay("one");
+
+            //this code below are replaced by numberDisplay() function
+            // const num = document.getElementById("one").innerText;
+            // console.log(typeof(num));
+            // const numDisp = document.getElementById("num-display").value + num;
+                
+            // if (numDisp.length <= 4) {
+            //     const currentNum = document.getElementById("num-display").value = numDisp;
+            //     console.log(currentNum.length);
+
+            // }else{
+            //     return;
+            // }
+        })
+
+
+        const two = document.getElementById("two");
+        two.addEventListener('click', function(){
+
+            let dispNum = numberDisplay("two");
+
+        })
+
+        const three = document.getElementById("three");
+        three.addEventListener('click', function(){
+
+            let dispNum = numberDisplay("three");
+
+        })
+
+
+        const four = document.getElementById("four");
+        four.addEventListener('click', function(){
+
+            let dispNum = numberDisplay("four");
+
+        })
+
+
+        const five = document.getElementById("five");
+        five.addEventListener('click', function(){
+
+            let dispNum = numberDisplay("five");
+
+        })
+
+
+        const six = document.getElementById("six");
+        six.addEventListener('click', function(){
+
+            let dispNum = numberDisplay("six");
+
+        })
+
+
+        
+        const seven = document.getElementById("seven");
+        seven.addEventListener('click', function(){
+
+            let dispNum = numberDisplay("seven");
+
+        })
+
+
+        
+        const eight = document.getElementById("eight");
+        eight.addEventListener('click', function(){
+
+            let dispNum = numberDisplay("eight");
+
+        })
+
+
+        
+        const nine = document.getElementById("nine");
+        nine.addEventListener('click', function(){
+
+            let dispNum = numberDisplay("nine");
+
+        })
+
+
+
+        const zero = document.getElementById("zero");
+        zero.addEventListener('click', function(){
+
+            let dispNum = numberDisplay("zero");
+
+        })
+        
+        
+        const submit = document.getElementById('submit');
+        submit.addEventListener('click', function(){
+            const pinNum = eval(document.getElementById("rand-display").value);
+            console.log(pinNum);
+            console.log(typeof(pinNum));
+
+            const padNum = eval(document.getElementById("num-display").value);
+            console.log(padNum);
+            console.log(typeof(padNum));
+
+            if(pinNum == padNum){
+                document.getElementById("notification2").style.display = "block";
+                document.getElementById("notification1").style.display= "none";
+            }
+            else{
+                document.getElementById("notification1").style.display= "block";
+                document.getElementById("notification2").style.display = "none";
+            }
+        })
+
+
+
+
+        const blank = document.getElementById('clear');
+        blank.addEventListener('click', function(){
+
+            const Total = document.getElementById('num-display').value = "";
+            console.log(Total);
+            console.log(typeof(Total));
+        })
+
+        
+
+        const reduce = document.getElementById('reduce');
+        reduce.addEventListener('click', function(){
+            const num = document.getElementById('num-display').value;
+
+            var reduction = num.substring(0, num.length -1);
+            document.getElementById('num-display').value = reduction; 
+        })
+
+
+
+        // functions for number
+
+        function numberDisplay(id){
+            const num = document.getElementById(id).innerText;
+            console.log(typeof(num));
+            const numDisp = document.getElementById("num-display").value + num;
+                
+
+            if (numDisp.length <= 4) {
+                const currentNum = document.getElementById("num-display").value = numDisp;
+                console.log(currentNum.length);
+
+            }else{
+                return;
+            }
+        }
+
+    </script>
+
+</body>
+</html>
